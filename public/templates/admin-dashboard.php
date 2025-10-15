@@ -289,6 +289,20 @@ function formatDateForDisplay(isoDate) {
   return `${dd}.${mm}.${yyyy}`;
 }
 
+// Get CSS class for name font size in print mode
+function getNameSizeClass(nameText) {
+  const nameLength = (nameText || '').length;
+  
+  if (nameLength > 30) {
+    return 'tiny';
+  } else if (nameLength > 26) {
+    return 'small';
+  } else if (nameLength > 18) {
+    return 'medium';
+  }
+  return 'default';
+}
+
 /* Main App Component */
 function IDCAdminApp(){
   const [rows, setRows] = useState(loadData());
@@ -782,7 +796,11 @@ function IDCAdminApp(){
   }
   .photo img { width: 100%; height: 100%; object-fit: cover; }
   
-  .name { font-weight: 700; font-size: 4.2mm; margin-top: 2.5mm; color: #111827; line-height: 1.1; }
+  .name { font-weight: 700; margin-top: 2.5mm; color: #111827; line-height: 1.1; }
+  .name.default { font-size: 4.2mm; }
+  .name.medium { font-size: 3.5mm; }
+  .name.small { font-size: 2.8mm; }
+  .name.tiny { font-size: 2.4mm; }
   .title { font-size: 2.2mm; color: #4b5563; margin-bottom: 2mm; }
   
   .qr { 
@@ -806,7 +824,7 @@ function IDCAdminApp(){
   <div class="page front">
     <div class="content">
       <div class="photo"><img src="${it.photo || 'https://placehold.co/240x240?text=Photo'}" alt="Photo"></div>
-      <div class="name">${customerData.name}</div>
+      <div class="name ${getNameSizeClass(customerData.name)}">${customerData.name}</div>
       <div class="title">SSNYU: ${customerData.job_title || 'Student'}</div>
       <div class="qr"><img src="${qrDataURL}" alt="QR Code"></div>
       <div class="details">

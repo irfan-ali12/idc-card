@@ -283,6 +283,42 @@ function logout() {
   logoutForm.submit();
 }
 
+/* ---------- dynamic font sizing ---------- */
+function adjustNameFontSize(nameElement) {
+  if (!nameElement) return;
+  
+  const nameText = nameElement.textContent || '';
+  const nameLength = nameText.length;
+  
+  // Default font size
+  let fontSize = '28px';
+  
+  // Apply dynamic sizing based on character count
+  if (nameLength > 30) {
+    fontSize = '14px';
+  } else if (nameLength > 26) {
+    fontSize = '16px';
+  } else if (nameLength > 18) {
+    fontSize = '20px';
+  }
+  
+  nameElement.style.fontSize = fontSize;
+}
+
+// Get CSS class for name font size in print mode
+function getNameSizeClass(nameText) {
+  const nameLength = (nameText || '').length;
+  
+  if (nameLength > 30) {
+    return 'tiny';
+  } else if (nameLength > 26) {
+    return 'small';
+  } else if (nameLength > 18) {
+    return 'medium';
+  }
+  return 'default';
+}
+
 /* ---------- payload + preview ---------- */
 function buildPayload(){
   return {
@@ -303,6 +339,8 @@ function renderPreview(){
 
   $('w_title').textContent = `SSNYU: ${p.job_title}`;
   $('w_name').textContent     = p.name;
+  // Apply dynamic font sizing to name
+  adjustNameFontSize($('w_name'));
   $('w_nid').textContent      = p.national_id;
   $('w_dob').textContent      = p.dob_display;
   $('w_country').textContent  = p.country;
@@ -426,7 +464,11 @@ async function printCard(){
   }
   .photo img { width: 100%; height: 100%; object-fit: cover; }
   
-  .name { font-weight: 700; font-size: 4.2mm; margin-top: 2.5mm; color: #111827; line-height: 1.1; }
+  .name { font-weight: 700; margin-top: 2.5mm; color: #111827; line-height: 1.1; }
+  .name.default { font-size: 4.2mm; }
+  .name.medium { font-size: 3.5mm; }
+  .name.small { font-size: 2.8mm; }
+  .name.tiny { font-size: 2.4mm; }
   .title { font-size: 2.2mm; color: #4b5563; margin-bottom: 2mm; }
   
   .qr { 
@@ -450,7 +492,7 @@ async function printCard(){
   <div class="page front">
     <div class="content">
       <div class="photo"><img src="${photo}" alt="Photo"></div>
-      <div class="name">${p.name}</div>
+      <div class="name ${getNameSizeClass(p.name)}">${p.name}</div>
       <div class="title">SSNYU: ${p.job_title || 'Student'}</div>
       <div class="qr"><img src="${qrDataURL}" alt="QR Code"></div>
       <div class="details">
