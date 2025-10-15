@@ -1,0 +1,206 @@
+/* IDC Operator Dashboard - Orange Theme */
+
+.idc-error {
+    padding: 20px;
+    margin: 20px 0;
+    background: #e9d8ff;
+    border: 1px solid #d8b4fe;
+    color: #6b21a8;
+    border-radius: 4px;
+}
+
+/* Dark Purple theme overrides */
+.bg-brand-50 {
+    background-color: #faf7ff !important;
+}
+
+.bg-brand-100 {
+    background-color: #f3ecff !important;
+}
+
+.bg-brand-200 {
+    background-color: #e9d8ff !important;
+}
+
+.bg-brand-300 {
+    background-color: #d8b4fe !important;
+}
+
+.bg-brand-400 {
+    background-color: #c084fc !important;
+}
+
+.bg-brand-500 {
+    background-color: #a855f7 !important;
+}
+
+.bg-brand-600 {
+    background-color: #9333ea !important;
+}
+
+.bg-brand-700 {
+    background-color: #7c3aed !important;
+}
+
+.bg-brand-800 {
+    background-color: #6b21a8 !important;
+}
+
+.bg-brand-900 {
+    background-color: #581c87 !important;
+}
+
+.text-brand-50 {
+    color: #faf7ff !important;
+}
+
+.text-brand-100 {
+    color: #f3ecff !important;
+}
+
+.text-brand-200 {
+    color: #e9d8ff !important;
+}
+
+.text-brand-300 {
+    color: #d8b4fe !important;
+}
+
+.text-brand-400 {
+    color: #c084fc !important;
+}
+
+.text-brand-500 {
+    color: #a855f7 !important;
+}
+
+.text-brand-600 {
+    color: #9333ea !important;
+}
+
+.text-brand-700 {
+    color: #7c3aed !important;
+}
+
+.text-brand-800 {
+    color: #6b21a8 !important;
+}
+
+.text-brand-900 {
+    color: #581c87 !important;
+}
+
+.border-brand-50 {
+    border-color: #faf7ff !important;
+}
+
+.border-brand-100 {
+    border-color: #f3ecff !important;
+}
+
+.border-brand-200 {
+    border-color: #e9d8ff !important;
+}
+
+.border-brand-300 {
+    border-color: #d8b4fe !important;
+}
+
+.border-brand-400 {
+    border-color: #c084fc !important;
+}
+
+.border-brand-500 {
+    border-color: #a855f7 !important;
+}
+
+.border-brand-600 {
+    border-color: #9333ea !important;
+}
+
+.border-brand-700 {
+    border-color: #7c3aed !important;
+}
+
+.border-brand-800 {
+    border-color: #6b21a8 !important;
+}
+
+.border-brand-900 {
+    border-color: #581c87 !important;
+}
+
+/* Hover states */
+.hover\:bg-brand-50:hover {
+    background-color: #faf7ff !important;
+}
+
+.hover\:bg-brand-100:hover {
+    background-color: #f3ecff !important;
+}
+
+.hover\:bg-brand-600:hover {
+    background-color: #9333ea !important;
+}
+
+.hover\:bg-brand-700:hover {
+    background-color: #7c3aed !important;
+}
+
+/* Focus states */
+.focus\:ring-brand-500:focus {
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1) !important;
+}
+
+/* Dark mode overrides for purple theme */
+.dark\:bg-brand-900\/20 {
+    background-color: rgba(88, 28, 135, 0.2) !important;
+}
+
+.dark\:text-brand-300 {
+    color: #d8b4fe !important;
+}
+
+/* Ensure proper WordPress integration */
+.idc-admin-dashboard {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* WordPress admin bar accommodation */
+body.admin-bar .idc-admin-dashboard {
+    padding-top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar .idc-admin-dashboard {
+        padding-top: 46px;
+    }
+}
+
+/* Ensure compatibility with WordPress themes */
+.idc-admin-dashboard * {
+    box-sizing: border-box;
+}
+
+/* Loading state */
+.idc-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Print styles for ID cards */
+@media print {
+    .idc-no-print {
+        display: none !important;
+    }
+    
+    .idc-print-only {
+        display: block !important;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+    }
+}

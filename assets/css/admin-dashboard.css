@@ -1,0 +1,54 @@
+/* IDC Admin Dashboard - Additional Styles */
+
+.idc-error {
+    padding: 20px;
+    margin: 20px 0;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    border-radius: 4px;
+}
+
+/* Ensure proper WordPress integration */
+.idc-admin-dashboard {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* WordPress admin bar accommodation */
+body.admin-bar .idc-admin-dashboard {
+    padding-top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar .idc-admin-dashboard {
+        padding-top: 46px;
+    }
+}
+
+/* Ensure compatibility with WordPress themes */
+.idc-admin-dashboard * {
+    box-sizing: border-box;
+}
+
+/* Loading state */
+.idc-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Print styles for ID cards */
+@media print {
+    .idc-no-print {
+        display: none !important;
+    }
+    
+    .idc-print-only {
+        display: block !important;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+    }
+}

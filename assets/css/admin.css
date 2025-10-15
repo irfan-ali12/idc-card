@@ -1,0 +1,17 @@
+.idc-media-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.idc-media-field img.idc-preview {
+  background: #f7f7f9;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  max-width: 150px;
+}
+
+.idc-media-field button {
+  margin-right: 4px;
+}
