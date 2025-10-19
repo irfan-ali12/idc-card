@@ -1,9 +1,45 @@
-﻿const $ = id => document.getElementById(id);
+﻿﻿const $ = id => document.getElementById(id);
 // No longer needed - using job title instead of tracking ID
 const LS_KEY = 'ssnyu_cards';
 
 // Global configuration - moved outside DOMContentLoaded for access by all functions
 const cfg = (typeof IDC_CONFIG !== 'undefined') ? IDC_CONFIG : { rest:{}, assets:{}, card:{} };
+
+// Dynamic font sizing function for name field
+function adjustNameFontSize(nameElement) {
+  if (!nameElement) return;
+  
+  const nameText = nameElement.textContent || '';
+  const nameLength = nameText.length;
+  
+  // Default font size
+  let fontSize = '28px';
+  
+  // Apply dynamic sizing based on character count
+  if (nameLength > 30) {
+    fontSize = '14px';
+  } else if (nameLength > 26) {
+    fontSize = '16px';
+  } else if (nameLength > 18) {
+    fontSize = '20px';
+  }
+  
+  nameElement.style.fontSize = fontSize;
+}
+
+// Get CSS class for name font size in print mode
+function getNameSizeClass(nameText) {
+  const nameLength = (nameText || '').length;
+  
+  if (nameLength > 30) {
+    return 'tiny';
+  } else if (nameLength > 26) {
+    return 'small';
+  } else if (nameLength > 18) {
+    return 'medium';
+  }
+  return 'default';
+}
 
 // After DOM loads
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,6 +66,9 @@ if (!cfg.rest?.url || !cfg.rest?.nonce) {
   // Set default values
   $('w_name').textContent = 'alihamd';
   $('inpName').value = 'alihamd';
+  
+  // Apply dynamic font sizing to name
+  adjustNameFontSize($('w_name'));
   
   // Auto-set only issued date (not DOB)
   const today = new Date().toISOString().split('T')[0];
@@ -107,6 +146,8 @@ function renderPreview(){
   const pFull = buildPayloadFull();
 
   $('w_name').textContent      = pFull.name;
+  // Apply dynamic font sizing to name
+  adjustNameFontSize($('w_name'));
   $('w_title').textContent     = 'SSNYU: ' + (pFull.job_title || 'Student');
   $('w_nid').textContent       = pFull.national_id;
   $('w_dob').textContent       = fmtDate(pFull.date_of_birth);
@@ -393,10 +434,28 @@ function printCard(){
   @page { size: 53.98mm 85.6mm; margin: 0; }
   html, body { width: 53.98mm; height: 85.6mm; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @media print {
+    html, body { 
+      image-resolution: 300dpi; 
+      -webkit-image-resolution: 300dpi; 
+    }
+    img { 
+      image-rendering: -webkit-optimize-contrast; 
+      image-rendering: crisp-edges; 
+      max-width: none; height: auto;
+    }
+  }
+  /* 300 DPI optimization for print/PDF */
+  @media print {
+    html, body { image-resolution: 300dpi; -webkit-image-resolution: 300dpi; }
+    img { image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; }
+  }
   
   .page { 
     position: relative; width: 53.98mm; height: 85.6mm; overflow: hidden; 
-    background-size: 100% 100%; background-repeat: no-repeat; background-position: center; 
+    /* Minimal bleed: enlarge background by 0.5mm each side and offset */
+    background-size: calc(53.98mm + 1mm) calc(85.6mm + 1mm); 
+    background-repeat: no-repeat; background-position: -0.5mm -0.5mm; 
     page-break-after: always; border-radius: 0px !important;
   }
   .front { background-image: url('${frontImage}'); }
@@ -409,35 +468,39 @@ function printCard(){
   
   .photo { 
     width: 25.4mm; height: 25.4mm; border-radius: 50%; overflow: hidden; 
-    border: 0.4mm solid #22c55e; margin-top: 1.7mm; box-sizing: border-box; 
+    border: 0.8mm solid #22c55e; /* slightly thicker ring in print */ margin-top: 1.7mm; box-sizing: border-box; 
   }
   .photo img { width: 100%; height: 100%; object-fit: cover; }
   
-  .name { font-weight: 700; font-size: 4.2mm; margin-top: 2.5mm; color: #111827; line-height: 1.1; }
-  .title { font-size: 2.2mm; color: #4b5563; margin-bottom: 2mm; }
+  .name { font-weight: 700; margin-top: 2.5mm; color: #111827; line-height: 1.1; }
+  .name.default { font-size: 4.2mm; }
+  .name.medium { font-size: 3.5mm; }
+  .name.small { font-size: 2.8mm; }
+  .name.tiny { font-size: 2.4mm; }
+  .title { font-size: 2.2mm; color: #4b5563; font-weight: 700; margin-bottom: 2mm; }
   
   .qr { 
-    margin: 0.4mm 0; width: 12mm; height: 12mm; 
+    margin: 0.2mm 0; width: 12mm; height: 12mm; 
     display: flex; align-items: center; justify-content: center;
     background: #fff; border-radius: 2mm; box-shadow: 0 1mm 3mm rgba(0,0,0,.08);
   }
   .qr img { width: 12mm; height: 12mm; object-fit: contain; }
   
   .details { 
-    width: 85%; margin-top: 2mm; padding-bottom: 2mm; font-size: 2.1mm; line-height: 1.6; 
+    width: 85%; margin-top: 2mm; padding-bottom: 2mm; font-size: 2.3mm; line-height: 1.6; 
     display: flex; flex-direction: column; gap: 1mm; 
   }
   .detail-row { 
     display: grid; grid-template-columns: 1.3fr 2mm 1.6fr; align-items: center; gap: 1.2mm; 
   }
-  .detail-row .label { text-align: right; color: #374151; white-space: nowrap; font-size: 2.1mm; }
-  .detail-row .colon { text-align: center; color: #374151; font-size: 2.1mm; }
-  .detail-row .value { text-align: left; color: #374151; font-style: oblique; letter-spacing: .02em; font-size: 2.1mm; }
+  .detail-row .label { text-align: right; color: #374151; white-space: nowrap; font-size: 2.3mm; }
+  .detail-row .colon { text-align: center; color: #374151; font-size: 2.3mm; }
+  .detail-row .value { text-align: left; color: #374151; font-style: oblique; letter-spacing: .02em; font-size: 2.3mm; }
 </style></head><body>
   <div class="page front">
     <div class="content">
       <div class="photo"><img src="${photo}" alt="Photo"></div>
-      <div class="name">${p.name}</div>
+      <div class="name ${getNameSizeClass(p.name)}">${p.name}</div>
       <div class="title">SSNYU: ${p.job_title || 'Student'}</div>
       <div class="qr"><img src="${qrDataURL}" alt="QR Code"></div>
       <div class="details">

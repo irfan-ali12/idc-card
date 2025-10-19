@@ -2,7 +2,7 @@
 /**
  * Plugin Name: IDC Card – Pixel-Perfect ID Cards
  * Description: Pixel-perfect CR80 portrait ID cards with live QR, exact 2-page print, roles, DB versioning, and audit log.
- * Version: 0.1.0
+ * Version: 0.1.2
  * Requires at least: 6.0
  * Requires PHP: 8.0
  * Author: Gbcodies

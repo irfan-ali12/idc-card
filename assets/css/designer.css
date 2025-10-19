@@ -134,7 +134,7 @@ body.idc-overlay-on .idc-details { outline:1px dashed rgba(255,0,0,.5); }
   height: 180px;
   border-radius: 50%;
   overflow: hidden;
-  border: 1.5px solid #22c55e;
+  border: 4px solid #22c55e; /* slightly thicker ring */
   margin-top: 12px;
   box-sizing: border-box;  /* border doesn't increase outer size */
 }
@@ -153,12 +153,13 @@ body.idc-overlay-on .idc-details { outline:1px dashed rgba(255,0,0,.5); }
 .title {
   font-size: 13px;               /* was 12px */
   color: #4b5563;
+  font-weight: 600;              /* a little bit bolder */
   margin-bottom: 10px;
 }
 
 /* CHANGED: smaller QR so overall stack uses ~65–70% height */
 .qr {
-  margin: 4px 0;                     /* was 6px 0 (or 10px earlier) */
+  margin: 2px 0;                     /* slightly reduced to keep stack height */
   width: 54px;                       /* was 60px */
   height: 54px;
 }
@@ -174,7 +175,7 @@ body.idc-overlay-on .idc-details { outline:1px dashed rgba(255,0,0,.5); }
   margin-top: 8px;
   padding-bottom: 8px;
   font-family: 'Poppins', sans-serif;
-  font-size: 13px;
+  font-size: 14px;                  /* slightly larger details text */
   line-height: 1.7;
   display: flex;
   flex-direction: column;
