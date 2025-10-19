@@ -156,7 +156,7 @@ $defaultPhoto = 'https://placehold.co/240x240?text=Photo';
   .front-content{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; }
   .front-content .photo{
     width:180px; height:180px; border-radius:999px; overflow:hidden;
-    border:3px solid var(--brand); background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.08);
+    border:5px solid var(--brand); background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.08);
     margin-top:20px;
   }
   .front-content .photo img{ width:100%; height:100%; object-fit:cover; }
@@ -165,7 +165,7 @@ $defaultPhoto = 'https://placehold.co/240x240?text=Photo';
     font-weight:700; font-size:28px; margin-top:12px; color:#111827; text-align:center;
   }
   .front-content .title{
-    font-size:13px; color:#4b5563; margin-bottom:10px; text-align:center;
+    font-size:13px; font-weight:700; color:#4b5563; margin-bottom:10px; text-align:center;
   }
 
   .front-content .qr{

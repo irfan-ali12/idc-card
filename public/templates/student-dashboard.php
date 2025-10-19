@@ -51,11 +51,11 @@ $backURL  = $settings['back_png_id']  ? wp_get_attachment_url((int)$settings['ba
   .card-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:fill; }
   .front-content, .back-content{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; }
 
-  .front-content .photo{ width:180px; height:180px; border-radius:999px; overflow:hidden; border:3px solid #16a34a; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.08); margin-top:40px; }
+  .front-content .photo{ width:180px; height:180px; border-radius:999px; overflow:hidden; border:5px solid #16a34a; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.08); margin-top:40px; }
   .front-content .photo img{ width:100%; height:100%; object-fit:cover; }
 
   .front-content .name{ font-weight:700; font-size:28px; margin-top:12px; color:#111827; text-align:center; }
-  .front-content .title{ font-size:13px; color:#4b5563; margin-bottom:10px; text-align:center; }
+  .front-content .title{ font-size:13px; font-weight:700; color:#4b5563; margin-bottom:10px; text-align:center; }
 
   .front-content .qr{ width:54px; height:54px; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,.08); }
   .front-content .qr img,.front-content .qr canvas{ width:54px; height:54px; }
@@ -454,6 +454,7 @@ async function printCard(){
     background-repeat: no-repeat; 
     page-break-after: always; border-radius: 0px !important;
   }
+  .page:last-of-type { page-break-after: auto; }
   .front { background-image: url('${frontImage}'); }
   .back { background-image: url('${backImage}'); }
   

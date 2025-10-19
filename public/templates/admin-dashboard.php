@@ -786,6 +786,7 @@ function IDCAdminApp(){
     background-repeat: no-repeat; 
     page-break-after: always; border-radius: 0px !important;
   }
+  .page:last-of-type { page-break-after: auto; }
   .front { background-image: url('${frontImage}'); }
   .back { background-image: url('${backImage}'); }
   
