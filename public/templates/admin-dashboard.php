@@ -289,20 +289,6 @@ function formatDateForDisplay(isoDate) {
   return `${dd}.${mm}.${yyyy}`;
 }
 
-// Get CSS class for name font size in print mode
-function getNameSizeClass(nameText) {
-  const nameLength = (nameText || '').length;
-  
-  if (nameLength > 30) {
-    return 'tiny';
-  } else if (nameLength > 26) {
-    return 'small';
-  } else if (nameLength > 18) {
-    return 'medium';
-  }
-  return 'default';
-}
-
 /* Main App Component */
 function IDCAdminApp(){
   const [rows, setRows] = useState(loadData());
@@ -777,20 +763,6 @@ function IDCAdminApp(){
   html, body { width: 53.98mm; height: 85.6mm; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   
-  /* 300 DPI settings */
-  @media print {
-    body { 
-      image-resolution: 300dpi; 
-      -webkit-image-resolution: 300dpi; 
-    }
-    img { 
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
-      max-width: none !important;
-      height: auto !important;
-    }
-  }
-  
   .page { 
     position: relative; width: 53.98mm; height: 85.6mm; overflow: hidden; 
     background-size: 100% 100%; background-repeat: no-repeat; background-position: center; 
@@ -806,16 +778,12 @@ function IDCAdminApp(){
   
   .photo { 
     width: 25.4mm; height: 25.4mm; border-radius: 50%; overflow: hidden; 
-    border: 0.8mm solid #22c55e; margin-top: 1.7mm; box-sizing: border-box; 
+    border: 0.4mm solid #22c55e; margin-top: 1.7mm; box-sizing: border-box; 
   }
   .photo img { width: 100%; height: 100%; object-fit: cover; }
   
-  .name { font-weight: 700; margin-top: 2.5mm; color: #111827; line-height: 1.1; }
-  .name.default { font-size: 4.2mm; }
-  .name.medium { font-size: 3.5mm; }
-  .name.small { font-size: 2.8mm; }
-  .name.tiny { font-size: 2.4mm; }
-  .title { font-size: 2.8mm; color: #4b5563; font-weight: 600; margin-top: 0.79mm; margin-bottom: 1.21mm; }
+  .name { font-weight: 700; font-size: 4.2mm; margin-top: 2.5mm; color: #111827; line-height: 1.1; }
+  .title { font-size: 2.2mm; color: #4b5563; margin-bottom: 2mm; }
   
   .qr { 
     margin: 0.4mm 0; width: 12mm; height: 12mm; 
@@ -825,20 +793,20 @@ function IDCAdminApp(){
   .qr img { width: 12mm; height: 12mm; object-fit: contain; }
   
   .details { 
-    width: 85%; margin-top: 2mm; padding-bottom: 2mm; font-size: 2.3mm; line-height: 1.6; 
+    width: 85%; margin-top: 2mm; padding-bottom: 2mm; font-size: 2.1mm; line-height: 1.6; 
     display: flex; flex-direction: column; gap: 1mm; 
   }
   .detail-row { 
     display: grid; grid-template-columns: 1.3fr 2mm 1.6fr; align-items: center; gap: 1.2mm; 
   }
-  .detail-row .label { text-align: right; color: #374151; white-space: nowrap; font-size: 2.3mm; }
-  .detail-row .colon { text-align: center; color: #374151; font-size: 2.3mm; }
-  .detail-row .value { text-align: left; color: #374151; font-style: oblique; letter-spacing: .02em; font-size: 2.3mm; }
+  .detail-row .label { text-align: right; color: #374151; white-space: nowrap; font-size: 2.1mm; }
+  .detail-row .colon { text-align: center; color: #374151; font-size: 2.1mm; }
+  .detail-row .value { text-align: left; color: #374151; font-style: oblique; letter-spacing: .02em; font-size: 2.1mm; }
 </style></head><body>
   <div class="page front">
     <div class="content">
       <div class="photo"><img src="${it.photo || 'https://placehold.co/240x240?text=Photo'}" alt="Photo"></div>
-      <div class="name ${getNameSizeClass(customerData.name)}">${customerData.name}</div>
+      <div class="name">${customerData.name}</div>
       <div class="title">SSNYU: ${customerData.job_title || 'Student'}</div>
       <div class="qr"><img src="${qrDataURL}" alt="QR Code"></div>
       <div class="details">

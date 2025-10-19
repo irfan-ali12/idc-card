@@ -240,18 +240,6 @@ body.idc-overlay-on .idc-details { outline:1px dashed rgba(255,0,0,.5); }
     width: 100% !important;
     background: transparent !important;
     -webkit-print-color-adjust: exact !important;
-  }
-  
-  /* 300 DPI settings */
-  body { 
-    image-resolution: 300dpi; 
-    -webkit-image-resolution: 300dpi; 
-  }
-  img { 
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    max-width: none !important;
-    height: auto !important;
     print-color-adjust: exact !important;
   }
 
